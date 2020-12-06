@@ -1,0 +1,1520 @@
+let c1x = 488, c2x = 637, c3x = 570;
+let y = 375;
+let diameter = 50;
+let dragging = false, firstClose = false, firstOpen = false, secondClose = false, final = false, endP = false, endGame = false, startGame = false, dRotate = false, aCut = false, sRotate = false, fRotate = false, pRotate = false;
+let pCount = 0, gameCount = 0, fCount = 0, dCount = 0, sCount = 0;
+let value = 'red';
+let backgroundMusic, circleDrop, ascending1, ascending2, ascending3, cheer;
+let timer = 45;
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+
+///----------- Preload Images and Sounds -------------\\\
+
+
+function preload() {
+  
+  
+// Sounds
+  backgroundMusic = loadSound('background.mp3');
+  circleDrop = loadSound('circleDrop.mp3'); 
+  ascending1 = loadSound('firstAscension.mp3');
+  ascending2 = loadSound('secondAscension.mp3');
+  ascending3 = loadSound('thirdAscension.mp3');
+  cheer = loadSound('cheer.mp3');
+  fail = loadSound('fail.mp3');
+  cut = loadSound('cut.mp3');
+  
+  
+// House pics
+  fHouse1 = loadImage('HousePics/fHouse1.png');
+  fHouse = loadImage('HousePics/fHouse.png');
+  topHouse = loadImage('HousePics/topHouse.png');
+  Picture1 = loadImage('HousePics/Picture1.png')
+
+
+  
+// // Animal pics
+  
+//   // dog
+  dog = loadImage('Animals/dog/dog.png');
+  dog1 = loadImage('Animals/dog/dog.stp1.png');
+  dog2 = loadImage('Animals/dog/dog.stp2.png');
+  dRotate2 = loadImage('Animals/dog/dRotate/dRotate2.png');
+  
+  
+//   // sheep
+  sheep = loadImage('Animals/sheep/sheep.png');
+  sheep1 = loadImage('Animals/sheep/sheep.stp1.png');
+  sheep2 = loadImage('Animals/sheep/sheep.stp2.png');
+  sheep3 = loadImage('Animals/sheep/sheep.stp3.png');
+  sRotate1 = loadImage('Animals/sheep/sRotate1.png');
+  sRotate2 = loadImage('Animals/sheep/sRotate2.png');
+  sRotate3 = loadImage('Animals/sheep/sRotate3.png');
+  
+  
+//   // frog
+  frog = loadImage('Animals/frog/frog.png');
+  frog1 = loadImage('Animals/frog/frog.stp1.png');
+  frog2 = loadImage('Animals/frog/frog.stp2.png');
+  frog3 = loadImage('Animals/frog/frog.stp3.png');
+  frog4 = loadImage('Animals/frog/frog.stp4.png');
+  fRotate1 = loadImage('Animals/frog/rFrog/fRotate1.png');
+  fRotate2 = loadImage('Animals/frog/rFrog/fRotate2.png');
+  fRotate3 = loadImage('Animals/frog/rFrog/fRotate3.png');
+  fRotate4 = loadImage('Animals/frog/rFrog/fRotate4.png');
+  
+// Scissor pics
+  openScissors = loadImage('Scissors/openScissors.png');
+  leftStraight = loadImage('Scissors/leftStraight.png');
+  rightStraight = loadImage('Scissors/rightStraight.png');
+  leftOpen = loadImage('Scissors/leftOpen.png');
+  rightOpen = loadImage('Scissors/rightOpen.png');
+  straight = loadImage('Scissors/straight.png');
+}
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+
+///---------------- Setup Background -----------------\\\
+
+
+function setup() {
+  createCanvas(800, 450);
+  backgroundMusic.loop();
+  backgroundMusic.setVolume(0.3);
+  
+ }
+ 
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+
+///------------------ Draw Function ------------------\\\
+
+
+function draw() {
+  background(255, 255, 255);
+  noStroke();
+  fill(255, 255, 255);
+  rect(17, 17, 765, 417);
+  
+  
+  
+ 
+///----- Dragging -----\\\
+  
+  
+  if(dragging) {
+    c1x = mouseX;
+    
+    
+    
+// Closing the Scissors
+    if(pCount == 0) {
+      if(dist(c3x, y , mouseX, mouseY) < diameter / 2) {
+        firstClose = true;
+        pCount++;
+        value = 'green';
+        touchEnded();
+      }
+    }
+    
+    
+    
+// Opening the Scissors
+    if(pCount == 1) {
+      if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+        firstOpen = true;
+        pCount++;
+        value = 'green';
+        touchEnded();
+      }     
+    }
+    
+    
+    
+// Close A Second Time
+    if(pCount == 2) {
+      if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+        secondClose = true;
+        final = true;
+        pCount++;
+        value = 'green';
+        touchEnded();
+      }
+    }
+             
+        
+        
+// THIS IS NEEDED TO FINISH THE PRACTICE
+    if(pCount == 3) {
+      if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+        final = true;
+        pCount++;
+        value = 'green';
+        touchEnded();
+      }
+    }
+    
+    
+///-----------Dog Rounds----------\\\
+// Round 1 Dog
+    if(dCount == 1) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         dCount++
+         cut.play();
+         dRotate = false;
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 2 Dog
+    if(dCount == 2) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         dCount++
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 3 Dog
+    if(dCount == 3) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         dCount++
+         cut.play();
+         value = 'green';
+         touchEnded();
+       }
+    }
+     
+// Round 4 Dog
+    if(dCount == 4) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         dCount++;
+         ascending1.play();
+         ascending1.setVolume(0.3);
+         value = 'green';
+         touchEnded();
+       }
+    }
+  
+    
+///-----------Sheep Rounds----------\\\
+// Round 1 Sheep 
+    if(sCount == 1) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         sCount++
+         cut.play();
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 2 Sheep 
+    if(sCount == 2) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         sCount++;
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 3 Sheep 
+    if(sCount == 3) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         sCount++;
+         cut.play();
+         sRotate = false;
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 4 Sheep 
+    if(sCount == 4) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         sCount++;
+
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 5 Sheep 
+    if(sCount == 5) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         sCount++;
+         cut.play();
+         
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 6 Sheep 
+    if(sCount == 6) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         sCount++;
+         ascending2.play();
+         ascending2.setVolume(0.3);
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+    
+///----------Frog Rounds-------------\\\
+// Round 1 Frog
+    if(fCount == 1) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         fCount++;
+         fRotate = false;
+         cut.play();
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 2 Frog
+    if(fCount == 2) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         fCount++;
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 3 Frog
+    if(fCount == 3) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         fCount++;
+         fRotate = false;
+         cut.play();
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 4 Frog
+    if(fCount == 4) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         fCount++;
+         
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 5 Frog
+    if(fCount == 5) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         fCount++;
+         fRotate = false;
+         cut.play();
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 6 Frog
+    if(fCount == 6) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         fCount++;
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 7 Frog
+    if(fCount == 7) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         fCount++;
+         cut.play();
+         value = 'green';
+         touchEnded();
+       }
+    }
+    
+// Round 8 Frog
+    if(fCount == 8) {
+       if(dist(c3x, y, mouseX, mouseY) < diameter / 2) {
+         fCount++;
+         ascending3.play();
+         ascending3.setVolume(0.3);
+         cheer.play();
+         cheer.setVolume(0.3);
+         value = 'green';
+         touchEnded();
+       }
+    }
+  
+  } 
+  
+  
+
+  
+  
+  
+  
+  
+///----------Displaying Text-----------------\\\
+  
+  
+// Text for closing the scissors once
+  if(pCount == 0) {
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    textAlign(CENTER)
+    fill(0, 0, 0);
+    textSize(24);
+    text('Lets Practice', 225, 100);
+    text('Closing The Scissors!', 225, 185);
+    textSize(18);
+    aCut = true;
+  }  
+  
+  
+  
+// Text for opening the scissors
+  if(pCount == 1) {
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    textAlign(CENTER)
+    fill(0, 0, 0);
+    textSize(24);
+    text('Now, Lets Practice', 225, 100);
+    text(' Opening The Scissors!', 225, 185);
+    aCut = true;
+  } 
+  
+  
+  
+// Text for cutting the sticker
+  if(pCount == 3) {
+    
+    // Rotate Button
+    stroke('lightskyblue');
+    strokeWeight(4);
+    fill(225,225,225);
+    if(dist(100, 200, mouseX, mouseY) < diameter / 2) {
+      fill(204,229,255);
+    }
+    circle(100,200,60);
+    strokeWeight(0);
+    fill(0,0,0);
+    textSize(18);
+    text('Rotate', 100, 205);
+    
+    if(pRotate == false){
+      image(fHouse1, 200, height / 2.5, fHouse1.width / 2.5, fHouse1.height / 2.5);
+      fill(0, 0, 0);
+      textSize(24);
+      text('Now, click the rotate button to rotate the sticker', 300, 80);
+      aCut = false;
+    }
+    if(pRotate == true) {
+      image(Picture1, 340, height / 30, Picture1.width / 3, Picture1.height / 3);
+      image(topHouse, 465, height / 6, topHouse.width / 2.5, topHouse.height / 2.5);
+      aCut = true;
+      fill(0, 0, 0);
+      textSize(24);
+      text('Trim the sticker on the dotted line!', 225, 80);
+    }
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    textAlign(CENTER)
+    
+    
+    
+  }
+    
+  
+  
+// Text for finishing the exercise
+  if(pCount == 4) {
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    textAlign(CENTER);
+    fill(0, 0, 0);
+    textSize(35);
+    text('Good Work!', 400, 100);
+    textSize(24);
+    noStroke();
+    textSize(24);
+    text('Now, see if you can trim all of the', 400, 180);
+    text('stickers in 45 seconds!', 400, 240);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    
+    
+    
+// Start Button
+    stroke(102,255,102);
+    strokeWeight(4);
+    fill(225,225,225);
+    if(dist(400, 330, mouseX, mouseY) < diameter) {
+      fill(204,255,204);
+    }
+    circle(400,330,100);
+    strokeWeight(0);
+    fill(0,0,0);
+    text('Start!', 400, 335);
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+//------------Game Time-----------\\\
+  if(gameCount > 0 && gameCount < 4 && endGame != true && startGame == true){
+    fill(0,0,0);
+    if(timer >= 10) {
+      text('Time: ', 725, 50);
+      text(timer, 753, 50);
+    }
+    if(timer < 10) {
+      text('Time: ', 725, 50);
+      fill('red');
+      text(timer, 753, 50);
+      fill(0,0,0);
+    }
+    if(timer == 0) {
+      fail.play();
+      
+      fCount = 9;
+      endGame = true;
+    }
+    
+    
+    
+    
+    
+  
+    if(dCount > 0 && dCount < 5) {
+      text('Level Difficulty : ', 100, 50);
+      fill('green');
+      text('Easy', 180, 50)
+    }
+    if(sCount > 0 && sCount < 7) {
+      text('Level Difficulty : ', 100, 50);
+      fill('orange');
+      text('Medium', 190, 50);
+    }
+    if(fCount > 0 && fCount < 8) {
+      text('Level Difficulty : ', 100, 50);
+      fill('red');
+      text('Hard', 180, 50);
+    }
+    
+    
+    
+  // Rotate Button
+    stroke('lightskyblue');
+    strokeWeight(4);
+    fill(225,225,225);
+    if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      fill(204,229,255);
+    }
+    circle(120,180,60);
+    strokeWeight(0);
+    fill(0,0,0);
+    text('Rotate', 120, 185);
+    
+  }
+  
+  
+  
+
+  
+  
+
+  
+  
+  // Round 1 Dog 
+  if(dCount == 1 && endGame != true) {
+    
+    image(dog1, 400, height /45, dog1.width / 2, dog1.height / 2);
+    
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+  }
+  
+
+// Round 2 Dog 
+  if(dCount == 2 && endGame != true) {
+    
+    if(dRotate == false){
+      image(dog2, 440, height / 40, dog2.width / 2, dog2.height / 2);
+    }
+    if(dRotate == true){
+      aCut = true;
+      dRotate2.resize(300, 350);
+      image(dRotate2, 415, height / 8, dRotate.width / 2, dRotate.height / 2);
+      
+    }
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+  }
+  
+// Round 3 Dog 
+  if(dCount == 3 && endGame != true) {
+    if(dRotate == false){
+      aCut = false;
+      image(dog2, 440, height / 40, dog2.width / 2, dog2.height / 2);
+    }
+    if(dRotate == true){
+      aCut = true;
+      dRotate2.resize(300, 350);
+      image(dRotate2, 415, height / 8, dRotate.width / 2, dRotate.height / 2);
+      
+    }
+    // image(dog2, 440, height / 8, dog2.width / 2, dog2.height / 2);
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+  }
+  
+// Round 4 Dog 
+  if(dCount == 4 && endGame != true) {
+    image(dog, 225, height / 8, dog.width / 2, dog.height / 2);
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    
+    fill(0,0,0);
+    text('Open the scissors to go to the next sticker', 400, 80);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+  }
+  
+  
+  
+// Round 1 Sheep
+  if(sCount == 1 && endGame != true) {
+    image(sheep1, 350, height / 10, sheep1.width / 2, sheep1.height / 2);
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+   
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+  }
+
+// Round 2 Sheep
+  if(sCount == 2 && endGame != true) {
+    
+    if(sRotate == false){
+      image(sheep2, 350, height / 10, sheep2.width / 2, sheep2.height / 2);
+    }
+    if(sRotate == true){
+      aCut = true;
+      image(sRotate1, 265, height / 40, sRotate1.width / 2, sRotate1.height / 2);
+      
+    }
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+  }
+  
+// Round 3 Sheep
+  if(sCount == 3 && endGame != true) {
+    
+    if(sRotate == false){
+      image(sheep2, 350, height / 10, sheep2.width / 2, sheep2.height / 2);
+      aCut = false;
+    }
+    if(sRotate == true){
+      aCut = true;
+      image(sRotate1, 265, height / 40, sRotate1.width / 2, sRotate1.height / 2);
+      
+    }
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+  }
+  
+// Round 4 Sheep
+  if(sCount == 4 && endGame != true) {
+    
+    if(sRotate == false){
+      image(sRotate3, 265, height / 40, sRotate3.width / 2, sRotate3.height / 2);
+    }
+    if(sRotate == true){
+      aCut = true;
+      sRotate2.resize(800,850);
+      image(sRotate2, 345, height / 200, sRotate2.width / 2, sRotate2.height / 2);
+      
+    }
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+  }
+  
+// Round 5 Sheep
+  if(sCount == 5 && endGame != true) {
+    
+    if(sRotate == false){
+      image(sRotate3, 265, height / 40, sRotate3.width / 2, sRotate3.height / 2);
+      aCut = false;
+    }
+    if(sRotate == true){
+      aCut = true;
+      sRotate2.resize(800,850);
+      image(sRotate2, 345, height / 200, sRotate2.width / 2, sRotate2.height / 2);
+      
+    }
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+  }
+  
+// Round 6 Sheep
+  if(sCount == 6 && endGame != true) {
+    image(sheep, 225, height / 8, sheep.width / 2, sheep.height / 2);
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    
+    fill(0,0,0);
+    text('Open the scissors to go to the next sticker', 400, 80);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+  }
+  
+  
+  
+// Round 1 Frog
+  if(fCount == 1 && endGame != true) {
+    
+    if(fRotate == false) {
+      image(frog1, 315, height / 8, frog1.width / 2, frog1.height / 2);
+      aCut = false;
+    }
+    if(fRotate == true) {
+      aCut = true;
+      
+      image(fRotate1, 430, height / 45, fRotate1.width / 2, fRotate1.height / 2);
+    }
+    
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+    image(sheep, 75, height / 1.33, sheep.width / 3, sheep.height / 3);
+  }
+  
+// Round 2 Frog
+  if(fCount == 2 && endGame != true) {
+    
+    if(fRotate == false) {
+      image(frog2, 430, height / 40, frog2.width / 2, frog2.height / 2);
+    }
+    if(fRotate == true) {
+      aCut = true;
+      
+      image(fRotate2, 300, height / 30, fRotate2.width / 2, fRotate2.height /2);
+    }
+    
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+    image(sheep, 75, height / 1.33, sheep.width / 3, sheep.height / 3);
+  }
+  
+// Round 3 Frog
+  if(fCount == 3 && endGame != true) {
+    
+    if(fRotate == false) {
+      image(frog2, 430, height / 40, frog2.width / 2, frog2.height / 2);
+      aCut = false;
+    }
+    if(fRotate == true) {
+      aCut = true;
+      
+      image(fRotate2, 300, height / 30, fRotate2.width / 2, fRotate2.height /2);
+    }
+    
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+    image(sheep, 75, height / 1.33, sheep.width / 3, sheep.height / 3);
+  }
+  
+// Round 4 Frog
+  if(fCount == 4 && endGame != true) {
+    
+    if(fRotate == false) {
+      
+      image(frog3, 435, height / 8.5, frog3.width / 2, frog3.height / 2); 
+    }
+    if(fRotate == true) {
+      aCut = true;
+      fRotate3.resize(800, 800);
+      image(fRotate3, 255, height / 1000, fRotate3.width / 2, fRotate3.height / 2); 
+    }
+    
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+    image(sheep, 75, height / 1.33, sheep.width / 3, sheep.height / 3);
+  }
+  
+// Round 5 Frog
+  if(fCount == 5 && endGame != true) {
+    
+    if(fRotate == false) {
+      
+      image(frog3, 435, height / 8.5, frog3.width / 2, frog3.height / 2);   
+      aCut = false;
+    }
+    if(fRotate == true) {
+      aCut = true;
+      fRotate3.resize(800, 800);
+      image(fRotate3, 255, height / 1000, fRotate3.width / 2, fRotate3.height / 2); 
+    }
+  
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+    image(sheep, 75, height / 1.33, sheep.width / 3, sheep.height / 3);
+  }
+  
+// Round 6 Frog
+  if(fCount == 6 && endGame != true) {
+    
+    if(fRotate == false) {
+      frog4.resize(850, 800);
+      image(frog4, 236, height / 15, frog4.width / 2, frog4.height / 2); 
+      
+    }
+    if(fRotate == true) {
+      aCut = true;
+      image(fRotate4, 300, height / 10, fRotate4.width / 1.8, fRotate4.height / 1.8); 
+    }
+    
+    
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+    image(sheep, 75, height / 1.33, sheep.width / 3, sheep.height / 3);
+  }
+
+// Round 7 Frog
+  if(fCount == 7 && endGame != true) {
+    
+    if(fRotate == false) {
+      frog4.resize(850, 800);
+      image(frog4, 236, height / 15, frog4.width / 2, frog4.height / 2);  
+      aCut = false;
+    }
+    if(fRotate == true) {
+      aCut = true;
+      image(fRotate4, 300, height / 10, fRotate4.width / 1.8, fRotate4.height / 1.8);
+    }
+    
+    image(openScissors, 450, height / 8, openScissors.width / 2.55, openScissors.height / 2.55);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+    image(sheep, 75, height / 1.33, sheep.width / 3, sheep.height / 3);
+  }
+  
+// Round 8 Frog
+  if(fCount == 8 && endGame != true) {
+    image(frog, 225, height / 8, frog.width / 2, frog.height / 2);
+    image(straight, 485, height / 9, straight.width / 2.70, straight.height / 2.70);
+    
+    fill(0,0,0);
+    textSize(16);
+    text('Your Stickers', 125, 340);
+    image(fHouse, 10, height / 1.35, fHouse.width / 6, fHouse.height / 6);
+    image(dog, 60, height / 1.40, dog.width / 3, dog.height / 3);
+    image(sheep, 75, height / 1.33, sheep.width / 3, sheep.height / 3);
+  }
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+///--------End of the game screen---------\\\
+  
+  if(endGame == true) {
+    fill(0,0,0);
+    textSize(38);
+    if(gameCount == 1) {
+      text('Good Work!', 400, 100);
+      textSize(24);
+      text('You were able to collect one sticker!', 400, 400);
+      text('Keep practicing to collect all of the stickers', 400, 425);
+      image(fHouse, 300, height / 4.5, fHouse.width / 3, fHouse.height / 3);
+    }
+    if(gameCount == 2) {
+      textSize(38);
+      text('Wow!', 400, 100);
+      textSize(24);
+      text('You were half way there!', 400, 400);
+      text('Try again to collect the last two stickers', 400, 425);
+      image(fHouse, 300, height / 4.5, fHouse.width / 3, fHouse.height / 3);
+      image(dog, 300, height / 2, dog.width / 2, dog.height / 2);
+    }
+    if(gameCount == 3) {
+      textSize(38);
+      text('Amazing!', 400, 100);
+      textSize(24);
+      text('You were so close!', 400, 400);
+      text('Try again to get the last sticker', 400, 425);
+      image(fHouse, 300, height / 4.5, fHouse.width / 3, fHouse.height / 3);
+      image(dog, 300, height / 2, dog.width / 2, dog.height / 2);
+      image(sheep, 75, height / 2.5, sheep.width / 2, sheep.height / 2);
+    }
+    if(gameCount == 4) {
+      textSize(38);
+      text('You did it with ' + timer + ' seconds left!', 400, 100);
+      textSize(24);
+      text('You collected all four stickers!', 400, 400);
+      text('Try again to practice your skills', 400, 425);
+      image(fHouse, 300, height / 4.5, fHouse.width / 3, fHouse.height / 3);
+      image(dog, 300, height / 2, dog.width / 2, dog.height / 2);
+      image(sheep, 75, height / 2.5, sheep.width / 2, sheep.height / 2);
+      image(frog, 420, height / 2.5, frog1.width / 2, frog1.height / 2);
+    }
+  }
+  
+
+  
+  
+///----- Building the circles -----\\\
+  
+if(pCount < 4) {
+  strokeWeight(1);
+  stroke('black');
+  fill('white');
+  ellipse(c3x, y, diameter, diameter);
+  stroke('black');
+  fill(value);
+  ellipse(c1x, y, diameter, diameter);
+  stroke('black');
+  fill(value);
+  ellipse(c2x, y, diameter, diameter);
+}
+  
+  
+if(pCount == 5 && fCount != 9) {
+  
+  strokeWeight(1);
+  stroke('black');
+  fill('white');
+  ellipse(c3x, y, diameter, diameter);
+  stroke('black');
+  fill(value);
+  ellipse(c1x, y, diameter, diameter);
+  fill(value);
+  ellipse(c2x, y, diameter, diameter);
+  
+}
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+
+///---------------Clicking The Circle ----------------\\\
+
+
+function touchStarted() {
+  
+// Enable Dragging when over circle and circle is not green
+  if(dist(c1x, y, mouseX, mouseY) < diameter / 2) {  
+    if(value != 'green' && aCut == true) {
+      dragging = true;
+      
+      
+      
+// When the Circle is red and touched, circle is yellow    
+    if(value == 'red') {
+        value = 'yellow';
+      }
+      
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+
+///- Releasing The Click Or Successful Open / Close --\\\
+
+
+function touchEnded() {
+  
+   dragging = false;
+  
+  
+  
+///------- Playing Sounds -------\\\
+  
+  
+// Sound for dropping the circle
+  if(dist(c1x, y , mouseX, mouseY) < diameter / 2 && value == 'yellow') {
+        circleDrop.play();
+        circleDrop.setVolume(0.1);
+  }
+  
+  
+  
+// Sound for closing the scissors
+  if(value == 'green' && pCount < 4) {
+    if(pCount < 2) {
+      ascending1.play();
+      ascending1.setVolume(0.3);
+    }
+// Sound for opening the scissors
+    if(pCount == 2) {
+      ascending2.play();
+      ascending2.setVolume(0.3);
+    }
+  }
+  
+  
+  
+// Sound for completing the practice
+  if(pCount == 4 && endP == false) {
+      ascending3.play();
+      ascending3.setVolume(0.3);
+      endP = true;
+    }
+
+  
+  
+  
+  
+  
+  
+  
+  
+///----- Re-Positioning Circles & Color Change -----\\\
+  
+///----------------Practice Exercises----------------\\\
+  
+// First close exercise
+  if(firstClose == true && firstOpen == false && pCount < 4) {
+    c1x = 555;
+    c2x = 637;
+    c3x = 488;
+    value = 'red';    
+  }
+  else if (firstClose == false || firstOpen == true && pCount < 4) {
+    c1x = 488;
+    
+    if(dist(100, 200, mouseX, mouseY) < diameter / 2) {
+      
+        if(pRotate == false){
+          pRotate = true;
+        }
+        
+      }
+  }
+
+  
+  
+// First open exercise  
+  if(firstClose == true && firstOpen == true && secondClose == true && pCount < 4) {
+    c1x = 488;
+    c2x = 637;
+    c3x = 570;
+    value = 'red';   
+  } 
+  else if (firstClose == true && firstOpen == true && secondClose == true && pCount < 4) {
+    c1x = 488;
+  }
+  
+  
+  
+// Cutting exercise
+  if(final == true && endP == true && pCount < 5) { 
+    c1x = 555;
+    c2x = 637;
+    c3x = 555;
+    value = 'green'
+  }
+  else if (final == true && pCount < 5) {
+    c1x = 488;
+  }
+
+  
+
+///----------Game Play-------------\\\
+ 
+///---------Dog Rounds------------\\\
+
+// Round 1 Dog
+if(gameCount == 0 && pCount == 4) {
+    if(dist(400, 330, mouseX, mouseY) < diameter){
+      
+      startGame = true;
+      timeIt();
+      pCount++;
+      dCount++;
+      gameCount++;
+      
+      c1x = 488;
+      c2x = 637;
+      c3x = 570;
+      value = 'red';
+      
+    }
+}
+  
+  
+// Round 2 Dog
+if(dCount == 2) {
+    c1x = 555;
+    c2x = 637;
+    c3x = 488;
+    value = 'red';
+
+  }
+else if (dCount == 1) {
+    c1x = 488;  
+  }
+
+  
+// Round 3 Dog 
+if(dCount == 3){
+    c1x = 488;
+    c2x = 637;
+    c3x = 570;
+    value = 'red';
+}
+else if (dCount == 2){
+    c1x = 555;
+  
+  if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(dRotate == false){
+          dRotate = true;
+        }
+        
+      }
+}
+  
+  
+// Round 4 Dog
+// Open Scissors for next round
+if(dCount == 4){
+    c1x = 555;
+    c2x = 637;
+    c3x = 488;
+    value = 'red';
+}
+else if (dCount == 3){
+    c1x = 488;
+  
+  if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(dRotate == false){
+          dRotate = true;
+        }
+        
+      }
+}
+  
+  
+  
+  
+
+///-------Sheep Rounds-------\\\
+// Round 1 Sheep
+if(gameCount == 1 && dCount == 5) {
+      gameCount++;
+      dCount++;
+      sCount++;
+      c1x = 488;
+      c2x = 637;
+      c3x = 570;
+      value = 'red';
+}
+
+  
+// Round 2 Sheep
+if(sCount == 2){
+    c1x = 555;
+    c2x = 637;
+    c3x = 488;
+    value = 'red';
+    
+}
+else if (sCount == 1){
+    c1x = 488;
+}
+
+  
+// Round 3 Sheep
+  if(sCount == 3){
+    c1x = 488;
+    c2x = 637;
+    c3x = 570;
+    value = 'red';
+}
+else if (sCount == 2){
+    c1x = 555;
+    
+    if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+        
+        if(sRotate == false){
+          sRotate = true;
+        }
+        
+      }
+}
+  
+  
+// Round 4 Sheep
+  if(sCount == 4){
+    c1x = 555;
+    c2x = 637;
+    c3x = 488;
+    value = 'red';
+}
+else if (sCount == 3){
+    c1x = 488;
+  
+  if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(sRotate == false){
+          sRotate = true;
+        }
+        
+      }
+}
+  
+  
+// Round 5 Sheep
+  if(sCount == 5){
+    c1x = 488;
+    c2x = 637;
+    c3x = 570;
+    value = 'red';
+}
+else if (sCount == 4){
+    c1x = 555;
+  
+    if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(sRotate == false){
+          sRotate = true;
+        }
+        
+      }
+}
+  
+  
+// Round 6 Sheep
+  if(sCount == 6){
+    c1x = 555;
+    c2x = 637;
+    c3x = 488;
+    value = 'red';
+}
+else if (sCount == 5){
+    c1x = 488;
+  
+  if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(sRotate == false){
+          sRotate = true;
+        }
+        
+      }
+}
+  
+  
+// Round 7 Sheep
+// Open scissors for next round
+  if(sCount == 7){
+    c1x = 488;
+    c2x = 637;
+    c3x = 570;
+    value = 'red';
+}
+else if (sCount == 6){
+    c1x = 555;
+}
+  
+
+  
+///-------Frog Rounds-------\\\
+// Round 1 Frog
+if(gameCount == 2 && sCount == 7) {
+      gameCount++;
+      sCount++;
+      fCount++;
+      c1x = 488;
+      c2x = 637;
+      c3x = 570;
+      value = 'red';
+}
+
+  
+// Round 2 Frog
+if(fCount == 2){
+    c1x = 555;
+    c2x = 637;
+    c3x = 488;
+    value = 'red';
+}
+else if (fCount == 1){
+    c1x = 488;
+    
+    if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(fRotate == false){
+          fRotate = true;
+        }
+        
+      }
+}
+
+  
+// Round 3 Frog
+  if(fCount == 3){
+    c1x = 488;
+    c2x = 637;
+    c3x = 570;
+    value = 'red';
+}
+else if (fCount == 2){
+    c1x = 555;
+  
+     if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(fRotate == false){
+          fRotate = true;
+        }
+        
+      }
+}
+  
+  
+// Round 4 Frog
+  if(fCount == 4){
+    c1x = 555;
+    c2x = 637;
+    c3x = 488;
+    value = 'red';
+}
+else if (fCount == 3){
+    c1x = 488;
+  
+    if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(fRotate == false){
+          fRotate = true;
+        }
+        
+      } 
+}
+  
+  
+// Round 5 Frog
+  if(fCount == 5){
+    c1x = 488;
+    c2x = 637;
+    c3x = 570;
+    value = 'red';
+}
+else if (fCount == 4){
+    c1x = 555;
+    
+    if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(fRotate == false){
+          fRotate = true;
+        }
+        
+      } 
+}
+  
+// Round 6 Frog
+  if(fCount == 6){
+    c1x = 555;
+    c2x = 637;
+    c3x = 488;
+    value = 'red';
+}
+else if (fCount == 5){
+    c1x = 488;
+    
+    if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(fRotate == false){
+          fRotate = true;
+        }
+        
+      } 
+}
+  
+  
+// Round 7 Frog
+// Open scissors for next round
+  if(fCount == 7){
+    c1x = 488;
+    c2x = 637;
+    c3x = 570;
+    value = 'red';
+    
+    if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(fRotate == false){
+          fRotate = true;
+        }
+        
+      }
+}
+else if (fCount == 6){
+    c1x = 555;
+    
+    if(dist(120, 180, mouseX, mouseY) < diameter / 2) {
+      
+        if(fRotate == false){
+          fRotate = true;
+        }
+        
+      }
+}
+  
+  
+// End Game
+  if(fCount == 8){
+    gameCount++;
+    endGame = true;
+    startGame = false; 
+  }
+  
+  
+  
+  
+  
+// Default color if dropped
+  if (value == 'yellow') {  
+    value = 'red';
+  }     
+  
+}
+
+
+
+
+
+
+
+// Timer Function
+function timeIt() {
+  setInterval(function() {
+    if(startGame == true) {
+    if (timer > 0) {
+      timer--;
+    }
+    }
+  }, 1000);
+  
+}
