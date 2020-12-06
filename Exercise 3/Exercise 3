@@ -1,0 +1,347 @@
+let fontfile,aArray,sound,sound1,img;
+let fontSize = 400,width1 = 200,height1 = 355, radius =53,score=0;
+let alphabet = "";
+let alphaButton=[],on_offButton;
+
+//This function makes sure to preload the file inside it
+
+function preload(){
+  
+  fontfile = loadFont('fontfile.otf');
+  sound = loadSound('failBuzzer.mp3');
+  sound1 = loadSound('background.mp3');
+  img = loadImage('alpha.jpg');
+  
+}
+
+function setup() {
+
+  createCanvas(800, 450);
+  background('black');
+  selectButton();
+  sound1.loop();
+  sound1.setVolume(0.3);
+  
+}
+
+
+//function draw helps to keep image and the text Background sound
+
+function draw(){
+    textSize(15);
+  fill('white');
+  text('Background sound:',5,445);
+  image(img,540,125,250,250);
+}
+
+
+// This function helps to mute and unmute the background sound
+
+function tooglePlaying()
+{
+  if(sound1.isLooping())
+    {
+      sound1.pause();
+      on_offButton.html("on");
+    }
+  else
+    {
+       sound1.loop();
+      on_offButton.html("off");
+    }
+}
+
+
+// This function helps to make the buttons available on canvas screen
+
+function selectButton(){
+  
+  on_offButton = createButton("off");
+  on_offButton.mousePressed(tooglePlaying);
+  on_offButton.position(135,425);
+  
+   alphaButton[0] = createButton("A");
+  alphaButton[0].mousePressed(alphaA);
+  alphaButton[0].position(0,0);
+  
+  alphaButton[1] = createButton("B");
+  alphaButton[1].mousePressed(alphaB);
+  alphaButton[1].position(30,0);
+  
+  alphaButton[2] = createButton("C");
+  alphaButton[2].mousePressed(alphaC);
+  alphaButton[2].position(60,0);
+  
+  alphaButton[3] = createButton("D");
+  alphaButton[3].mousePressed(alphaD);
+  alphaButton[3].position(90,0);
+  
+  alphaButton[4] = createButton("E");
+  alphaButton[4].mousePressed(alphaE);
+  alphaButton[4].position(120,0);
+  
+  alphaButton[5] = createButton("F");
+  alphaButton[5].mousePressed(alphaF);
+  alphaButton[5].position(150,0);
+  
+  alphaButton[6] = createButton("G");
+  alphaButton[6].mousePressed(alphaG);
+  alphaButton[6].position(180,0);
+  
+  alphaButton[7] = createButton("H");
+  alphaButton[7].mousePressed(alphaH);
+  alphaButton[7].position(210,0);
+  
+  alphaButton[8] = createButton("I");
+  alphaButton[8].mousePressed(alphaI);
+  alphaButton[8].position(240,0);
+  
+  alphaButton[9] = createButton("J");
+  alphaButton[9].mousePressed(alphaJ);
+  alphaButton[9].position(270,0);
+  
+  alphaButton[10] = createButton("K");
+  alphaButton[10].mousePressed(alphaK);
+  alphaButton[10].position(300,0);
+  
+  alphaButton[11] = createButton("L");
+  alphaButton[11].mousePressed(alphaL);
+  alphaButton[11].position(330,0);
+  
+  alphaButton[12] = createButton("M");
+  alphaButton[12].mousePressed(alphaM);
+  alphaButton[12].position(360,0);
+  
+  alphaButton[13] = createButton("N");
+  alphaButton[13].mousePressed(alphaN);
+  alphaButton[13].position(390,0);
+  
+  alphaButton[14] = createButton("O");
+  alphaButton[14].mousePressed(alphaO);
+  alphaButton[14].position(420,0);
+  
+  alphaButton[15] = createButton("P");
+  alphaButton[15].mousePressed(alphaP);
+  alphaButton[15].position(450,0);
+  
+  alphaButton[16] = createButton("Q");
+  alphaButton[16].mousePressed(alphaQ);
+  alphaButton[16].position(480,0);
+  
+  alphaButton[17] = createButton("R");
+  alphaButton[17].mousePressed(alphaR);
+  alphaButton[17].position(510,0);
+  
+  alphaButton[18] = createButton("S");
+  alphaButton[18].mousePressed(alphaS);
+  alphaButton[18].position(540,0);
+  
+  alphaButton[19] = createButton("T");
+  alphaButton[19].mousePressed(alphaT);
+  alphaButton[19].position(570,0);
+  
+  alphaButton[20] = createButton("U");
+  alphaButton[20].mousePressed(alphaU);
+  alphaButton[20].position(600,0);
+  
+  alphaButton[21] = createButton("V");
+  alphaButton[21].mousePressed(alphaV);
+  alphaButton[21].position(630,0);
+  
+  alphaButton[22] = createButton("W");
+  alphaButton[22].mousePressed(alphaW);
+  alphaButton[22].position(660,0);
+  
+  alphaButton[23] = createButton("X");
+  alphaButton[23].mousePressed(alphaX);
+  alphaButton[23].position(690,0);
+  
+  alphaButton[24] = createButton("Y");
+  alphaButton[24].mousePressed(alphaY);
+  alphaButton[24].position(720,0);
+  
+  alphaButton[25] = createButton("Z");
+  alphaButton[25].mousePressed(alphaZ);
+  alphaButton[25].position(750,0);
+  
+
+}
+
+
+//This function sets the letter and makes them print on the screen
+
+function setAlpha(alphabet){
+   
+ score=0;
+  textFont(fontfile);
+  textSize(fontSize);
+  aArray= fontfile.textToPoints(alphabet,width1,height1,fontSize);
+   background('black');
+  
+  
+  for(let i=0;i<aArray.length;i++)
+    {
+      noStroke();
+      fill('pink');
+      circle(aArray[i].x,aArray[i].y,radius);
+      
+    }
+  
+}
+
+
+// used to control red and green line while tracing
+
+ function mouseDragged()
+{
+    
+  let c = 1;
+  fill('red');
+  noStroke();
+  circle(mouseX,mouseY,30);
+  for(let i=0;i<aArray.length;i++)
+    {
+     
+     
+      let d= dist(mouseX,mouseY,aArray[i].x,aArray[i].y);
+      if(d< 30)
+         {
+           fill('green');
+           noStroke();
+           circle(mouseX,mouseY,30);
+           c=0;
+           score++;
+         }
+     
+    }
+  if(c===1)
+    {
+     sound.play();
+      sound.setVolume(0.1);
+    }
+  scores();
+}
+
+// This function helps to display score
+
+function scores()
+{
+  fill('black');
+  rect(550,400,300,50);
+  textSize(32);
+  fill('white');
+  text('Score: '+score,600,445);
+}
+
+// These set of functions helps to set and reset the alphabet appearing on the screen
+function alphaA()
+{
+  setAlpha("A");
+}
+function alphaB()
+{
+  setAlpha("B");
+}
+function alphaC()
+{
+  setAlpha("C");
+}
+function alphaD()
+{
+  setAlpha("D");
+}
+function alphaE()
+{
+  setAlpha("E");
+}
+function alphaF()
+{
+  setAlpha("F");
+}
+function alphaG()
+{
+  setAlpha("G");
+}
+function alphaH()
+{
+  setAlpha("H");
+}
+function alphaI()
+{
+  setAlpha("I");
+}
+function alphaJ()
+{
+  setAlpha("J");
+}
+function alphaK()
+{
+  setAlpha("K");
+}
+function alphaL()
+{
+  setAlpha("L");
+}
+function alphaM()
+{
+  setAlpha("M");
+}
+function alphaN()
+{
+  setAlpha("N");
+}
+function alphaO()
+{
+  setAlpha("O");
+}
+function alphaP()
+{
+  setAlpha("P");
+}
+function alphaQ()
+{
+  setAlpha("Q");
+}
+function alphaR()
+{
+  setAlpha("R");
+}
+function alphaS()
+{
+  setAlpha("S");
+}
+function alphaT()
+{
+  setAlpha("T");
+}
+function alphaU()
+{
+  setAlpha("U");
+}
+function alphaV()
+{
+  setAlpha("V");
+}
+function alphaW()
+{
+  setAlpha("W");
+}
+function alphaX()
+{
+  setAlpha("X");
+}
+function alphaY()
+{
+  setAlpha("Y");
+}
+function alphaZ()
+{
+  setAlpha("Z");
+}
+
+  
+  
+  
+
+
+
