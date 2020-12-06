@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<!--Set the background color to light blue-->
+<body style=background-color:#92caf7>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+  /*Create the default button features for the Next button such as set color when not hovered, font size, position, etc.*/
+.button {
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 5em;
+  border-radius: 10px;
+}
+
+/*Create a Next button as well as add a different color for the border*/
+.buttonNext {
+background-color: white; 
+  color: black; 
+  border: 4.5px solid #22e048;
+}
+
+/*Create the hover feature for the Next button as well as the color that appears once the button is hovered over*/
+.buttonNext:hover {
+background-color: #22e048;
+color: black;
+}
+
+/*Create the default button features for the Previous button such as set color when not hovered, font size, position, etc.*/
+.button1 {
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  position: absolute;
+  left: 110px;
+  top: 50px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 5em;
+  border-radius: 10px;
+}
+
+/*Create a Previous button as well as add a different color for the border*/
+.buttonPrevious {
+  background-color: white; 
+  color: black; 
+  border: 4.5px solid #be0ee6;
+}
+
+/*Create the hover feature for the Next button as well as the color that appears once the button is hovered over*/
+.buttonPrevious:hover {
+background-color: #be0ee6;
+color: black;
+}
+
+/*Create the default button features for the Reset button such as set color when not hovered, font size, position, etc.*/
+.button2 {
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  position: absolute;
+  left: 700px;
+  top: 625px;
+  cursor: pointer;
+  width: 5em;
+  border-radius: 10px;
+}
+
+/*Change the background color of the Reset button to red*/
+.buttonReset {
+background-color: #f76d6d;
+color: black;
+}
+
+/*Create the default button features for the Home button such as set color when not hovered, font size, position, etc.*/
+.button3 {
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  position: absolute;
+  left: 1300px;
+  top: 625px;
+  cursor: pointer;
+  width: 5em;
+  border-radius: 50px;
+}
+
+/*Change the color of the Home button to purple*/
+.buttonHome {
+background-color: #c34dfa;
+color: black;
+}
+
+</style>
+
+<!--Set the font size and font of the header as well as add the text for Cutting Stickers-->
+<h1 style = "font-family:Comic sans MS;font-size:25"><u><center>Cutting Stickers</u></center></h1>
+
+<!--Set the font size and font for the instructions as well as the text for the instructions-->
+<h2 style = "font-family:Comic sans MS;font-size:20; color:#4f4f4f"><center>Place both fingers on the red circles, then move your left finger to the white circle!</center></h2>
+<div class="rectangle"></div>
+<div class="progress"></div>
+
+<!--Insert the exercise into the webpage and adjust the features so they fit nicely-->
+<center><iframe style="width: 800px; height:450px; overflow: hidden;"  scrolling="no" frameborder="0"src="https://editor.p5js.org/jake-44/embed/fNWUIAp2T"></iframe></center>
+
+<!--Set the Next button to show the "Next" as well as set the font and to send to the Tracing the Alphabet exercise-->
+<a href="https://GreenyellowSwiftImplementation.jacquelinesalam.repl.co" class="button buttonNext" style="font-family:Comic sans MS">Next</a>
+
+<!--Set the Previous button to show the "Previous" as well as set the font and to send to the Shape Sorting exercise-->
+<a href="https://EffectiveSereneCones.jacquelinesalam.repl.co" class="button1 buttonPrevious" style="font-family:Comic sans MS">Previous</a>
+
+<!--Set the Reset button to show the "Reset" text as well as set the font and to refresh the exercise so the user can start over-->
+<a href="https://PriceyOutlandishLinuxkernel.jacquelinesalam.repl.co" class="button2 buttonReset" style="font-family:Comic sans MS">Reset</a>
+
+<!--Set the Home button to show the "Home" text as well as adjust the font and to redirect the user to the home screen-->
+<a href="https://RoastedFrugalSystemsanalysis.jacquelinesalam.repl.co" class="button3 buttonHome" style="font-family:Comic sans MS">Home</a>
+
+
+</body>
+</html>
